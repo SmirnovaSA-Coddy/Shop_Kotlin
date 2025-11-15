@@ -24,14 +24,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Название товара"
-            android:textSize="18sp"/>
+            android:textSize="18sp"
+            android:textColor="#FFFFFF"/>
 
         <TextView
             android:id="@+id/tvProductPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0.0 $"
-            android:textSize="16sp"/>
+            android:textSize="16sp"
+            android:textColor="#FFFFFF"/>
 
     </LinearLayout>
 
@@ -39,7 +41,11 @@
         android:id="@+id/btnDetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Подробнее"/>
+        android:text="Подробнее"
+        android:backgroundTint="#A0522D"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="#501D1D"/>
 
 
 </LinearLayout>
