@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -33,5 +34,13 @@ class DetailActivity : AppCompatActivity() {
         detailName.text = productName
         detailPrice.text = "$productPrice $"
         detailDescription.text = productDescription
+
+        buyButton.setOnClickListener {
+            Toast.makeText(this, "Товар добавлен в корзину", Toast.LENGTH_SHORT).show()
+        }
+
+        backButton.setOnClickListener {
+            finish()
+        }
     }
 }
