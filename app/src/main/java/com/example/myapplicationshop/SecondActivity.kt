@@ -39,7 +39,7 @@ class SecondActivity : AppCompatActivity() {
 
 //        val container = findViewById<LinearLayout>(R.id.catalogContainer)
 //
-//        products.forEach { product ->
+//        products.forEach {product ->
 //            val view = layoutInflater.inflate(R.layout.item_product, container, false)
 //
 //            view.findViewById<ImageView>(R.id.ivProductImage).setImageResource(product.ImageRes)
@@ -66,16 +66,17 @@ class SecondActivity : AppCompatActivity() {
 
 class ProductAdapter(
     private val context: android.content.Context,
-    private val products: List<Product>
+    private val products: List<Product>  // передаем в адаптер список товаров
 ) : android.widget.BaseAdapter(){
 
-    override fun getCount() = products.size
+    // перезапись обязательных функций
 
-    override fun getItem(position: Int) = products[position]
+    override fun getCount() = products.size // количество элементов
+    override fun getItem(position: Int) = products[position] // получение элемента по индексу
 
-    override fun getItemId(position: Int) = position.toLong()
+    override fun getItemId(position: Int) = position.toLong() // нахождение индекса элемента
 
-    override fun getView(pos: Int, convertView: View?, parent: ViewGroup?): View? {
+    override fun getView(pos: Int, convertView: View?, parent: ViewGroup?): View? { // создание одной карточки товара
         val view = convertView ?: LayoutInflater.from(context)
             .inflate(R.layout.item_product, parent, false)
 
