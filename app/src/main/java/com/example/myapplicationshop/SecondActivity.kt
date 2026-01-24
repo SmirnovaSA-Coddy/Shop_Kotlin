@@ -7,6 +7,8 @@ import Product
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -14,8 +16,18 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ListView
 import android.widget.TextView
+import androidx.appcompat.widget.Toolbar
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import kotlin.math.PI
 
 class SecondActivity : AppCompatActivity() {
+
+    private lateinit var lwList: ListView
+    private lateinit var rwGrid: RecyclerView
+    private lateinit var listAdapter: ProductAdapter
+    private lateinit var gridAdapter: ProductGridAdapter
+
     private val products = listOf(
         Product(1, "Кольцо 1", 50.0, "Описание 1", R.drawable.one),
         Product(2, "Кольцо 2", 25.5, "Описание 2", R.drawable.two),
@@ -28,13 +40,56 @@ class SecondActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_second)
 
-        val container = findViewById<ListView>(R.id.lvCatalog)
+        val toolbar = findViewById<Toolbar>(R.id.topBar)
+        setSupportActionBar(toolbar)
 
-        val adapter = ProductAdapter(this, products)
+        // 1. Находим оба списка на экране
+        lwList = findViewById(R.id.lvCatalog)
+        rwGrid = findViewById(R.id.rvCatalogGrid)
 
-        container.adapter = adapter
+        // 2. Находим адаптер для LW
+        listAdapter = ProductAdapter(this, products)
 
+        // 3. Находим адаптер для RW
+        gridAdapter = ProductGridAdapter(this, products)
 
+        // 4. Соединяем адаптер и список LW
+        lwList.adapter = listAdapter
+
+        // 5. Соединяем адаптер и список RW
+        rwGrid.layoutManager = GridLayoutManager(this, 2)
+        rwGrid.adapter = gridAdapter
+    }
+
+    private fun showList(){
+        lwList.visibility = View.VISIBLE
+        rwGrid.visibility = View.GONE
+    }
+
+    private fun showGrid(){
+        lwList.visibility = View.GONE
+        rwGrid.visibility = View.VISIBLE
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_second, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.action_list){
+            showList()
+            return true
+        }
+
+        if (item.itemId == R.id.action_grid){
+            showGrid()
+            return true
+        }
+
+        return super.onOptionsItemSelected(item)
+
+    }
 
 
 //        val container = findViewById<LinearLayout>(R.id.catalogContainer)
@@ -61,7 +116,6 @@ class SecondActivity : AppCompatActivity() {
 //        }
 
     }
-}
 
 
 class ProductAdapter(
