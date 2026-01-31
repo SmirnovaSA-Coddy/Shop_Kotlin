@@ -6,7 +6,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#501D1D"
+    android:background="@color/background_activity_main"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="15dp"
@@ -18,8 +18,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Добро пожаловать в ONYX"
-        android:textColor="#FFFFFF"
+        android:text="@string/welcome_text"
+        android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"/>
 
@@ -28,11 +28,11 @@
         android:id="@+id/btnStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="#F4F3D5"
+        android:backgroundTint="@color/button_activity_main"
         android:text="Начать покупки"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:textColor="#501D1D"
+        android:textColor="@color/background_activity_main"
         android:layout_marginTop="20dp"/>
 
 <!--Создание картинки и ее свойств-->
