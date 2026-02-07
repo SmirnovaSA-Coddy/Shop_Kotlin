@@ -40,9 +40,6 @@ class SecondActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_second)
 
-
-        val prefs = getSharedPreferences("settings", MODE_PRIVATE)
-
         val toolbar = findViewById<Toolbar>(R.id.topBar)
         setSupportActionBar(toolbar)
 
@@ -62,16 +59,29 @@ class SecondActivity : AppCompatActivity() {
         // 5. Соединяем адаптер и список RW
         rwGrid.layoutManager = GridLayoutManager(this, 2)
         rwGrid.adapter = gridAdapter
+
+        val prefs = getSharedPreferences("settings", MODE_PRIVATE)
+        val isGridPref = prefs.getBoolean("isGrid", true)
+
+        if ( isGridPref == true){
+            showGrid()
+        } else {
+            showList()
+        }
     }
 
     private fun showList(){
         lwList.visibility = View.VISIBLE
         rwGrid.visibility = View.GONE
+        val prefs = getSharedPreferences("settings", MODE_PRIVATE)
+        prefs.edit().putBoolean("isGrid", false).apply()
     }
 
     private fun showGrid(){
         lwList.visibility = View.GONE
         rwGrid.visibility = View.VISIBLE
+        val prefs = getSharedPreferences("settings", MODE_PRIVATE)
+        prefs.edit().putBoolean("isGrid", true).apply()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -150,6 +160,7 @@ class ProductAdapter(
 
         button.setOnClickListener {
                 val intent = Intent(context, DetailActivity::class.java).apply {
+                    putExtra("id", product.id)
                     putExtra("name", product.name)
                     putExtra("price", product.price)
                     putExtra("ImageRes", product.ImageRes)
